@@ -162,7 +162,8 @@ cp -r libai-skill/libai ~/.claude/skills/libai/
 
 **🌐 https://jangviktor-web.github.io/libai-skill/**
 
-<img width="820" src="docs/assets/og.jpg" alt="libai 功能说明页预览：冷调宣纸底，右侧石青矿物色晕，左下无字朱印方框">
+<img  height="883" alt="360截图20261008150005_compressed" src="https://github.com/user-attachments/assets/89b1d97f-1bca-4979-a2b8-574bab61c18f" />
+
 
 </div>
 
