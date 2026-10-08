@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#1E4C63">
+<title>李白 skill · 文学家思维蒸馏 — 唐诗鉴赏 / 出处考据 / 拟作 | libai agent skill</title>
+<meta name="description" content="李白 · 文学家思维 skill（libai）：把李白的诗学观、16 个意象母题与口吻蒸馏成 AI 可调用的角色包。含《李白诗全集》25 卷 1010 首正典、14 维框架、58 篇名篇赏析、创作六步法「气象体夸断尽」。引诗 grep 可核，拟作必标注非原作。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="author" content="jangviktor-web">
+<link rel="canonical" href="https://jangviktor-web.github.io/libai-skill/">
+<link rel="icon" type="image/webp" href="assets/logo@2x.webp">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="libai · 李白文学家思维 skill">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://jangviktor-web.github.io/libai-skill/">
+<meta property="og:title" content="李白 skill · 文学家思维蒸馏 — 唐诗鉴赏 / 考据 / 拟作">
+<meta property="og:description" content="正典 25 卷 1010 首 + 14 维框架 + 16 意象母题库 + 58 篇赏析。AI 以李白视角答问，引诗 grep 可核，拟作必署非原作。">
+<meta property="og:image" content="https://jangviktor-web.github.io/libai-skill/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="冷调宣纸底，右侧石青矿物色晕，左下无字朱印方框">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="李白 skill · 文学家思维蒸馏">
+<meta name="twitter:description" content="把李白的诗学观、意象系统与口吻蒸馏成 AI 可调用角色包。正典 1010 首，引诗 grep 可核。">
+<meta name="twitter:image" content="https://jangviktor-web.github.io/libai-skill/assets/og.jpg">
+<meta name="twitter:image:alt" content="冷调宣纸底，右侧石青矿物色晕，左下无字朱印方框">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "libai · 李白文学家思维 skill",
+  "alternateName": ["李白 skill", "Li Bai thinking skill", "libai-agent-skill"],
+  "url": "https://jangviktor-web.github.io/libai-skill/",
+  "codeRepository": "https://github.com/jangviktor-web/libai-skill",
+  "description": "把盛唐诗人李白的诗学观、意象系统与口吻蒸馏为 AI 可调用的角色技能包，用于唐诗鉴赏、诗学评述、出处考据与拟体创作。正典为《李白诗全集》25 卷 1010 首，一切引诗以 grep 命中为准，拟作强制标注非原作。",
+  "version": "1.1.0",
+  "datePublished": "2026-10-04",
+  "dateModified": "2026-10-05",
+  "programmingLanguage": ["Markdown", "Python"],
+  "runtimePlatform": "AI agent skill runtime",
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "keywords": "李白, 李白 skill, 唐诗, 古典诗歌, 文学鉴赏, 出处考据, 拟古诗, agent skill, 思维蒸馏, 知识库, Li Bai, Tang poetry, Chinese poetry, prompt persona, knowledge distillation",
+  "about": {
+    "@type": "Person",
+    "name": "李白",
+    "alternateName": ["李太白", "太白", "青莲居士", "诗仙", "谪仙人"],
+    "birthDate": "0701",
+    "deathDate": "0762",
+    "occupation": "诗人",
+    "nationality": "唐"
+  },
+  "creator": { "@type": "Organization", "name": "jangviktor-web", "url": "https://github.com/jangviktor-web" }
+}
+</script>
+<style>
+/* ============ tokens ============ */
+:root{
+  --paper:#E8EDEC;
+  --paper-raise:#F1F5F4;
+  --paper-sink:#DEE5E4;
+  --ink:#171B1E;
+  --ink-soft:#4A585E;
+  --ink-faint:#7A8A90;
+  --blue:#1E4C63;
+  --blue-deep:#123648;
+  --blue-wash:rgba(30,76,99,.07);
+  --red:#9E3B2C;
+  --rule:rgba(23,27,30,.13);
+
+  --f-display:"KaiTi","STKaiti","楷体","楷体_GB2312","BiauKai","Noto Serif CJK SC",serif;
+  --f-verse:"Songti SC","SimSun","宋体","Noto Serif CJK SC",serif;
+  --f-util:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;
+  --f-data:"Cascadia Mono",Consolas,"SF Mono","Menlo",monospace;
+
+  --measure:44rem;
+  --rail:9.5rem;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background-color:var(--paper);
+  /* 刻本界行：极淡的竖向纸纹，给纸本身一种材质 */
+  background-image:repeating-linear-gradient(90deg,
+      rgba(23,27,30,.035) 0 1px,
+      transparent 1px 3.25rem);
+  color:var(--ink);
+  font-family:var(--f-verse);
+  font-size:16.5px;
+  line-height:1.95;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--blue);
+  outline-offset:3px;
+  border-radius:1px;
+}
+h1,h2,h3,h4{margin:0;font-weight:400;font-family:var(--f-display)}
+p{margin:0 0 1.1em}
+p:last-child{margin-bottom:0}
+ul,ol{margin:0;padding-left:1.4em}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:99;
+  background:var(--blue);color:#fff;padding:.6rem 1rem;
+  font-family:var(--f-util);font-size:14px;text-decoration:none;
+}
+.skip:focus{left:1rem;top:1rem}
+
+/* ============ shell ============ */
+.sheet{
+  max-width:78rem;
+  margin:0 auto;
+  padding:0 clamp(1.1rem,4vw,3.5rem);
+  border-left:1px solid var(--rule);
+  border-right:1px solid var(--rule);
+}
+@media (min-width:900px){
+  .sheet{
+    display:grid;
+    grid-template-columns:var(--rail) minmax(0,1fr);
+    gap:clamp(2rem,5vw,4.5rem);
+  }
+}
+
+/* ============ 书耳 / 目次 ============ */
+.ear{padding-block:2.5rem 2rem}
+.ear-title{
+  font-family:var(--f-display);
+  font-size:1.05rem;
+  letter-spacing:.16em;
+  color:var(--ink-soft);
+  border-bottom:1px solid var(--rule);
+  padding-bottom:.7rem;
+  margin-bottom:.9rem;
+}
+.toc{list-style:none;margin:0;padding:0;font-family:var(--f-util);font-size:13px}
+.toc li{margin:0}
+.toc a{
+  display:block;
+  padding:.34rem 0 .34rem .8rem;
+  color:var(--ink-soft);
+  text-decoration:none;
+  border-left:2px solid transparent;
+  letter-spacing:.02em;
+  transition:color .18s,border-color .18s;
+}
+.toc a:hover{color:var(--blue-deep)}
+.toc a[aria-current="true"]{
+  color:var(--blue-deep);
+  border-left-color:var(--red);
+}
+@media (max-width:899px){
+  .ear{padding-block:1.2rem 0}
+  .ear-title{display:none}
+  .toc{
+    display:flex;gap:.1rem 1.2rem;overflow-x:auto;
+    padding-bottom:.9rem;border-bottom:1px solid var(--rule);
+    scrollbar-width:none;
+  }
+  .toc a{border-left:0;padding:.2rem .1rem;white-space:nowrap}
+  .toc a[aria-current="true"]{border-left:0;color:var(--red)}
+}
+
+/* ============ 正文带 ============ */
+.main{min-width:0;padding-bottom:5rem}
+section{scroll-margin-top:1.5rem}
+.band{
+  padding-block:clamp(2.8rem,7vw,4.6rem);
+  border-top:1px solid var(--rule);
+}
+
+.eyebrow{
+  font-family:var(--f-util);
+  font-size:11.5px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin:0 0 .5rem;
+}
+.h2{
+  font-size:clamp(1.5rem,3.1vw,2.05rem);
+  letter-spacing:.03em;
+  margin-bottom:.5rem;
+}
+.lede{
+  max-width:var(--measure);
+  font-size:1.02rem;
+  color:var(--ink-soft);
+  margin-top:0;
+}
+
+/* ============ hero ============ */
+.hero{
+  padding-block:clamp(2.2rem,5vw,3.4rem) clamp(2.4rem,6vw,3.6rem);
+  display:grid;
+  gap:clamp(1.6rem,4vw,3rem);
+  align-items:start;
+}
+@media (min-width:640px){
+  .hero{grid-template-columns:minmax(0,1fr) auto}
+}
+.hero-kicker{
+  font-family:var(--f-util);
+  font-size:12px;
+  letter-spacing:.2em;
+  color:var(--ink-faint);
+  margin:0 0 1rem;
+}
+.hero-name{
+  font-size:clamp(3.2rem,9vw,5.4rem);
+  line-height:.95;
+  letter-spacing:.06em;
+  margin:0 0 .5rem;
+}
+.hero-sub{
+  font-family:var(--f-display);
+  font-size:clamp(1.05rem,2.4vw,1.35rem);
+  color:var(--blue-deep);
+  letter-spacing:.05em;
+  margin:0 0 1.3rem;
+}
+.hero-claim{
+  max-width:33ch;
+  font-size:1rem;
+  color:var(--ink-soft);
+}
+.hero-claim em{font-style:normal;color:var(--ink);border-bottom:1px solid var(--red)}
+
+/* 竖排诗卷 — 本页唯一的装饰性重手 */
+.scroll-verse{
+  display:flex;
+  flex-direction:row-reverse;
+  gap:clamp(.35rem,1.4vw,.9rem);
+  height:min(46vh,20rem);
+  padding:.4rem 0;
+}
+.scroll-verse .vline{
+  writing-mode:vertical-rl;
+  text-orientation:upright;
+  font-family:var(--f-verse);
+  font-size:clamp(.95rem,2.1vw,1.22rem);
+  letter-spacing:.14em;
+  line-height:1;
+  color:var(--blue-deep);
+  white-space:nowrap;
+}
+.scroll-verse .vline.is-lead{
+  font-family:var(--f-display);
+  font-size:clamp(1.25rem,2.9vw,1.7rem);
+  color:var(--ink);
+  letter-spacing:.16em;
+}
+.scroll-verse .vline.is-note{
+  font-family:var(--f-util);
+  font-size:11px;
+  letter-spacing:.22em;
+  color:var(--ink-faint);
+}
+@media (max-width:639px){
+  .scroll-verse{
+    flex-direction:column;gap:.25rem;height:auto;
+    border-top:1px solid var(--rule);padding-top:1rem;
+  }
+  .scroll-verse .vline{writing-mode:horizontal-tb;letter-spacing:.1em;line-height:1.7}
+}
+
+/* 牌记 + 朱印 */
+.colophon{
+  grid-column:1/-1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:1rem 1.6rem;
+  padding:1.1rem 1.3rem;
+  background:var(--paper-raise);
+  border:1px solid var(--rule);
+}
+.seal{
+  flex:0 0 auto;
+  width:3.6rem;height:3.6rem;
+  display:grid;place-content:center;
+  background:var(--red);
+  color:#fff;
+  font-family:var(--f-display);
+  font-size:1rem;line-height:1.15;letter-spacing:.04em;
+  text-align:center;
+  writing-mode:vertical-rl;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.22);
+}
+.tally{
+  display:flex;flex-wrap:wrap;gap:.5rem 2rem;
+  font-family:var(--f-util);font-size:12px;
+}
+.tally div{display:flex;flex-direction:column;gap:.15rem}
+.tally .n{
+  font-family:var(--f-display);
+  font-size:1.5rem;line-height:1;color:var(--blue-deep);
+}
+.tally .k{letter-spacing:.14em;color:var(--ink-faint);font-size:11px}
+
+/* ============ 通用块 ============ */
+.def-list{
+  margin:0;
+  max-width:var(--measure);
+  border-top:1px solid var(--rule);
+}
+.def-list > div{
+  display:grid;
+  gap:.15rem 1.4rem;
+  padding:.85rem 0;
+  border-bottom:1px solid var(--rule);
+}
+@media (min-width:560px){.def-list > div{grid-template-columns:8.5rem minmax(0,1fr)}}
+.def-list dt{
+  font-family:var(--f-util);font-size:12px;letter-spacing:.14em;
+  color:var(--ink-faint);padding-top:.28rem;
+}
+.def-list dd{margin:0;font-size:1rem}
+.mono{font-family:var(--f-data);font-size:.86em;letter-spacing:0}
+
+.cards{
+  display:grid;gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+  margin-block:1.6rem;
+}
+@media (min-width:600px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.card{background:var(--paper-raise);padding:1.25rem 1.35rem}
+.card h3{
+  font-size:1.22rem;margin-bottom:.4rem;color:var(--blue-deep);
+  display:flex;align-items:baseline;gap:.5rem;
+}
+.card h3 .tag{
+  font-family:var(--f-util);font-size:10.5px;letter-spacing:.14em;
+  color:var(--ink-faint);
+}
+.card p{font-size:.96rem;color:var(--ink-soft)}
+
+/* 问答样例 */
+.qa{margin:1.4rem 0 0;max-width:var(--measure)}
+.qa > div{padding-block:1.1rem;border-top:1px solid var(--rule)}
+.qa-q{
+  font-family:var(--f-display);
+  font-size:1.12rem;color:var(--ink);margin:0 0 .35rem;
+}
+.qa-q::before{
+  content:"问";
+  font-family:var(--f-util);font-size:11px;letter-spacing:.1em;
+  color:var(--red);border:1px solid var(--red);
+  padding:.05rem .35rem;margin-right:.6rem;vertical-align:.15em;
+}
+.qa-a{margin:0;font-size:.98rem;color:var(--ink-soft)}
+.qa-a::before{
+  content:"应";
+  font-family:var(--f-util);font-size:11px;letter-spacing:.1em;
+  color:var(--blue);border:1px solid var(--blue);
+  padding:.05rem .35rem;margin-right:.6rem;vertical-align:.15em;
+}
+
+/* ============ 六步法 ============ */
+.steps{
+  display:flex;flex-wrap:wrap;gap:.5rem;
+  margin-block:1.5rem .5rem;
+}
+.step-btn{
+  flex:1 1 4.2rem;
+  min-width:4.2rem;
+  background:transparent;
+  border:0;border-bottom:2px solid var(--rule);
+  padding:.55rem .3rem .6rem;
+  cursor:pointer;
+  font-family:var(--f-display);
+  font-size:1.7rem;color:var(--ink-faint);
+  text-align:center;
+  transition:color .2s,border-color .2s,transform .2s;
+}
+.step-btn .i{
+  display:block;
+  font-family:var(--f-util);font-size:10px;letter-spacing:.18em;
+  margin-bottom:.15rem;
+}
+.step-btn:hover{color:var(--blue);transform:translateY(-2px)}
+.step-btn[aria-selected="true"]{
+  color:var(--ink);border-bottom-color:var(--red);
+}
+.step-panel{
+  border:1px solid var(--rule);
+  background:var(--paper-raise);
+  padding:1.4rem 1.5rem;
+}
+.step-panel h3{
+  font-size:1.5rem;color:var(--blue-deep);margin-bottom:.45rem;
+}
+.step-panel .gloss{font-size:1rem;max-width:var(--measure)}
+.step-panel .cite{
+  margin-top:1rem;padding-top:.8rem;border-top:1px dashed var(--rule);
+  font-size:.95rem;color:var(--ink-soft);
+}
+.step-panel .cite b{font-weight:400;color:var(--blue-deep)}
+
+/* ============ 表格 ============ */
+.tbl-wrap{overflow-x:auto;margin-block:1.5rem;border:1px solid var(--rule)}
+table{width:100%;border-collapse:collapse;font-size:.95rem;background:var(--paper-raise)}
+caption{
+  text-align:left;padding:.9rem 1.1rem;font-family:var(--f-display);
+  font-size:1.05rem;color:var(--blue-deep);border-bottom:1px solid var(--rule);
+}
+th,td{padding:.62rem 1.1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+th{
+  font-family:var(--f-util);font-size:11px;letter-spacing:.14em;font-weight:400;
+  color:var(--ink-faint);background:var(--paper-sink);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--blue-wash)}
+td.motif{font-family:var(--f-display);font-size:1.2rem;color:var(--blue-deep);white-space:nowrap}
+td .vs{font-family:var(--f-verse)}
+
+/* ============ 意象 chips ============ */
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-block:1.4rem}
+.chip{
+  font-family:var(--f-display);font-size:1.02rem;
+  background:transparent;border:1px solid var(--rule);
+  padding:.2rem .75rem;cursor:pointer;color:var(--ink-soft);
+  transition:background .18s,color .18s,border-color .18s;
+}
+.chip:hover{border-color:var(--blue);color:var(--blue-deep)}
+.chip[aria-pressed="true"]{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff}
+.motif-grid{
+  display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);
+  margin-bottom:1.4rem;
+}
+@media (min-width:680px){.motif-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.motif-cell{background:var(--paper-raise);padding:1.1rem 1.25rem}
+.motif-cell[hidden]{display:none}
+.motif-cell h4{
+  font-family:var(--f-display);font-size:1.35rem;color:var(--ink);
+  margin-bottom:.3rem;
+}
+.motif-cell .fn{font-size:.93rem;color:var(--ink-soft);margin-bottom:.5rem}
+.motif-cell .ex{font-size:.93rem;color:var(--blue-deep)}
+.motif-cell .ex span{display:block}
+.motif-cell .src{color:var(--ink-faint);font-family:var(--f-util);font-size:11px;letter-spacing:.04em}
+
+/* ============ 代码 / 目录树 ============ */
+pre.tree{
+  margin:1.4rem 0 0;padding:1.2rem 1.3rem;
+  background:#12212A;color:#D6E4EA;
+  font-family:var(--f-data);font-size:12.5px;line-height:1.85;
+  overflow-x:auto;border:1px solid var(--blue-deep);
+}
+pre.tree .cm{color:#7FA0AE}
+pre.tree .hl{color:#F0B08A}
+
+.note{
+  max-width:var(--measure);
+  margin-block:1.3rem;
+  padding-left:1.1rem;
+  border-left:2px solid var(--blue);
+  color:var(--ink-soft);font-size:.97rem;
+}
+
+/* ============ 校勘记 ============ */
+.proof{
+  display:grid;gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-block:1.5rem;
+}
+@media (min-width:640px){.proof{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.proof > div{background:var(--paper-raise);padding:1.15rem 1.3rem;position:relative}
+.proof .pk{
+  font-family:var(--f-util);font-size:11px;letter-spacing:.16em;color:var(--red);
+  margin-bottom:.3rem;
+}
+.proof .pv{font-family:var(--f-display);font-size:1.15rem;color:var(--ink);margin-bottom:.2rem}
+.proof .pd{font-size:.92rem;color:var(--ink-soft)}
+.stamp{
+  display:inline-block;
+  font-family:var(--f-display);font-size:12px;letter-spacing:.14em;
+  color:var(--red);border:1.5px solid var(--red);
+  padding:.1rem .5rem;transform:rotate(-2deg);
+}
+.strike{
+  text-decoration:line-through;
+  text-decoration-color:var(--red);
+  text-decoration-thickness:1.5px;
+  color:var(--ink-faint);
+}
+
+/* ============ 红线 / 边界 ============ */
+.laws{margin:1.5rem 0 0;padding:0;list-style:none;max-width:var(--measure)}
+.laws li{
+  padding:.75rem 0 .75rem 2.2rem;
+  border-bottom:1px solid var(--rule);
+  position:relative;font-size:.98rem;
+}
+.laws li::before{
+  content:counter(law);
+  counter-increment:law;
+  position:absolute;left:0;top:.85rem;
+  font-family:var(--f-display);font-size:1.15rem;color:var(--red);
+  border:1px solid var(--red);width:1.5rem;height:1.5rem;
+  display:grid;place-content:center;
+}
+.laws{counter-reset:law}
+.laws b{font-weight:400;color:var(--blue-deep)}
+.laws .k{font-family:var(--f-util);font-size:11px;letter-spacing:.12em;color:var(--ink-faint)}
+
+/* ============ 触发词 ============ */
+.triggers{display:flex;flex-wrap:wrap;gap:.45rem;margin-block:1.2rem}
+.trig{
+  font-family:var(--f-util);font-size:13px;
+  background:var(--paper-raise);border:1px solid var(--rule);
+  padding:.28rem .7rem;color:var(--ink-soft);
+}
+.trig.off{border-style:dashed;color:var(--ink-faint)}
+
+/* ============ 免责 / 版本 ============ */
+.fineprint{
+  max-width:var(--measure);font-size:.9rem;color:var(--ink-soft);
+  background:var(--paper-raise);border:1px solid var(--rule);
+  padding:1.2rem 1.3rem;margin-top:1.4rem;
+}
+.ledger{margin-top:1.4rem;max-width:var(--measure);border-top:1px solid var(--rule)}
+.ledger > div{
+  display:grid;gap:.1rem 1.4rem;padding:.9rem 0;border-bottom:1px solid var(--rule);
+}
+@media (min-width:560px){.ledger > div{grid-template-columns:11rem minmax(0,1fr)}}
+.ledger .ver{font-family:var(--f-display);font-size:1.1rem;color:var(--blue-deep)}
+.ledger .ver span{display:block;font-family:var(--f-util);font-size:11px;letter-spacing:.12em;color:var(--ink-faint)}
+.ledger p{margin:0;font-size:.95rem;color:var(--ink-soft)}
+
+footer.foot{
+  padding-block:2rem 3rem;border-top:1px solid var(--rule);
+  font-family:var(--f-util);font-size:12px;letter-spacing:.06em;
+  color:var(--ink-faint);display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
+}
+
+/* ============ motion ============ */
+.reveal{opacity:0;transform:translateY(14px)}
+.reveal.in{
+  opacity:1;transform:none;
+  transition:opacity .5s ease,transform .5s ease;
+}
+@media (prefers-reduced-motion:no-preference){
+  .scroll-verse .vline{animation:soak .9s cubic-bezier(.2,.7,.2,1) backwards}
+  .scroll-verse .vline:nth-child(1){animation-delay:.05s}
+  .scroll-verse .vline:nth-child(2){animation-delay:.2s}
+  .scroll-verse .vline:nth-child(3){animation-delay:.35s}
+  .scroll-verse .vline:nth-child(4){animation-delay:.5s}
+  @keyframes soak{
+    from{opacity:0;transform:translateY(-1.2rem);filter:blur(2px)}
+    to{opacity:1;transform:none;filter:none}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .step-btn{transition:none}
+}
+@media print{
+  body{background:#fff}
+  .ear,.skip{display:none}
+  .sheet{display:block;max-width:none;border:0}
+  .reveal{opacity:1;transform:none}
+  pre.tree{background:#fff;color:#111;border:1px solid #999}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#top">跳到正文</a>
+<div class="sheet">
+
+  <!-- ============ 书耳 ============ -->
+  <aside class="ear" aria-label="目次">
+    <div class="ear-title">libai 目次</div>
+    <nav>
+      <ul class="toc" id="toc">
+        <li><a href="#position">它是什么</a></li>
+        <li><a href="#do">能做什么</a></li>
+        <li><a href="#six">六步法</a></li>
+        <li><a href="#mind">八种心智模型</a></li>
+        <li><a href="#motif">十六个意象</a></li>
+        <li><a href="#base">知识底座</a></li>
+        <li><a href="#proof">校勘记</a></li>
+        <li><a href="#law">铁律与红线</a></li>
+        <li><a href="#use">怎么触发</a></li>
+        <li><a href="#release">版本</a></li>
+      </ul>
+    </nav>
+    <p style="margin:1.1rem 0 0;font-family:var(--f-util);font-size:12px;line-height:1.7">
+      <a href="https://github.com/jangviktor-web/libai-skill" style="color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue)">在 GitHub 查看 / 安装 ↗</a><br>
+      <a href="https://github.com/jangviktor-web/libai-skill/blob/main/LICENSE" style="color:var(--ink-faint);text-decoration:none">CC BY-SA 4.0</a>
+    </p>
+  </aside>
+
+  <main class="main" id="top">
+
+    <!-- ============ hero ============ -->
+    <header class="hero">
+      <div>
+        <p class="hero-kicker">文学家思维 skill · 14 维框架 · v1.1.0</p>
+        <h1 class="hero-name">李白</h1>
+        <p class="hero-sub">字太白，号青莲居士。701—762。</p>
+        <p class="hero-claim">
+          把他的诗学观、意象系统和口吻，蒸馏成 AI 可以调用的角色：
+          <em>唐诗鉴赏</em>、<em>诗学评述</em>、<em>出处考据</em>、<em>拟体创作</em>。
+          一切引诗以《李白诗全集》grep 命中为准，拟作必署「非李白原作」。
+        </p>
+      </div>
+
+      <!-- 竖排诗卷：首屏即诗本身 -->
+      <div class="scroll-verse" role="figure" aria-label="竖排诗句：大雅久不作，吾衰竟谁陈，君不见黄河之水天上来">
+        <span class="vline is-lead">大雅久不作</span>
+        <span class="vline is-lead">吾衰竟谁陈</span>
+        <span class="vline">君不见黄河之水天上来</span>
+        <span class="vline is-note">《古风》其一 · 《将进酒》</span>
+      </div>
+
+      <div class="colophon">
+        <div class="seal" aria-hidden="true">太白</div>
+        <div class="tally">
+          <div><span class="n">1010</span><span class="k">首诗</span></div>
+          <div><span class="n">25</span><span class="k">卷</span></div>
+          <div><span class="n">12</span><span class="k">份维度分析</span></div>
+          <div><span class="n">58</span><span class="k">篇名篇赏析</span></div>
+          <div><span class="n">40</span><span class="k">篇名篇导航</span></div>
+          <div><span class="n">35</span><span class="k">问常见问答</span></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ 它是什么 ============ -->
+    <section class="band reveal" id="position" aria-labelledby="position-h">
+      <p class="eyebrow">定位</p>
+      <h2 class="h2" id="position-h">这不是一个"扮演李白"的聊天设定</h2>
+      <p class="lede">
+        它是一份带正典语料、带检索规则、带免责模板的研究辅助材料。
+        角色激活时，AI 按 <span class="mono">SKILL.md</span> 的路由规则定位维度，按需加载维度分析与赏析库，
+        引诗前先在诗全集里核验。
+      </p>
+      <dl class="def-list">
+        <div><dt>领域</dt><dd>唐代文学 · 古典诗歌（诗学 / 鉴赏 / 考据 / 拟作）</dd></div>
+        <div><dt>核心框架</dt><dd>气 → 象 → 体 → 夸 → 断 → 尽（李白创作六步法）</dd></div>
+        <div><dt>知识边界</dt><dd>仅基于 <span class="mono">modules/</span> 诗全集与 <span class="mono">references/</span> 14 维；不涉现代诗，非古典诗歌话题不触发</dd></div>
+        <div><dt>用途</dt><dd>唐诗鉴赏、文学普及、AI 拟古写作示范</dd></div>
+        <div><dt>素材来源</dt><dd>一手：用户提供的《李白诗全集》电子本（25 卷 1010 首）；补充：联网检索生平年表、交游、历代评价、诗话，标注出处</dd></div>
+      </dl>
+    </section>
+
+    <!-- ============ 能做什么 ============ -->
+    <section class="band reveal" id="do" aria-labelledby="do-h">
+      <p class="eyebrow">能力</p>
+      <h2 class="h2" id="do-h">四类问题，四种输出形态</h2>
+      <p class="lede">回答前第一步就是判明类型——类型不同，措辞与免责方式不同。</p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>鉴赏评论<span class="tag">评论李白</span></h3>
+          <p>以「气先于辞」解析风格与章法，每个判断后面至少跟一句可核诗句或一条有出处的诗话。</p>
+        </article>
+        <article class="card">
+          <h3>出处考据<span class="tag">辨伪 · 异文</span></h3>
+          <p>辨一句诗的篇目归属、体裁、版本异文；集内自带伪作按语的篇目引用即加注，存疑处两说并列。</p>
+        </article>
+        <article class="card">
+          <h3>拟体创作<span class="tag">强制声明</span></h3>
+          <p>按六步法先定体裁骨架再填意，题首或题末必署「AI 拟李白风格之作，非李白原作」。</p>
+        </article>
+        <article class="card">
+          <h3>口吻代言<span class="tag">代言</span></h3>
+          <p>以李白视角答问，先给判断再给证据；遇内在张力主题则两面并置，不做单向拔高。</p>
+        </article>
+      </div>
+
+      <div class="qa">
+        <div>
+          <p class="qa-q">《将进酒》好在哪里？</p>
+          <p class="qa-a">以「气先于辞」分析：起句即满格，「君不见黄河之水天上来」因物起兴，数字可计算而情绪不可名状，末以「万古愁」宕开。</p>
+        </div>
+        <div>
+          <p class="qa-q">"床前明月光" 是原文吗？</p>
+          <p class="qa-a">说明本集正文与宋本异文并存，通行本文字来自明清改本，注明而非径改。</p>
+        </div>
+        <div>
+          <p class="qa-q">写一首李白风格的秋夜思乡诗</p>
+          <p class="qa-a">先定体裁（孤静思乡 → 五七言绝句），取月与舟二象，输出旧体诗并强制附「AI 拟李白体，非原作」。</p>
+        </div>
+        <div>
+          <p class="qa-q">"飞流直下三千尺" 引自哪篇？</p>
+          <p class="qa-a">出自《望庐山瀑布水二首》其二，本集可验——修复后该名篇即在正典 25 卷内。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 六步法 ============ -->
+    <section class="band reveal" id="six" aria-labelledby="six-h">
+      <p class="eyebrow">核心框架</p>
+      <h2 class="h2" id="six-h">气 → 象 → 体 → 夸 → 断 → 尽</h2>
+      <p class="lede">
+        这是李白与杜甫分道的关键：<b>不是先有题、再谋篇，而是先有气、再取象、最后才落实体裁</b>。
+        评论他时也可以用这条链解释其成败。点一步看一步。
+      </p>
+
+      <div class="steps" role="tablist" aria-label="创作六步">
+        <button class="step-btn" role="tab" id="s1" aria-controls="p1" aria-selected="true"><span class="i">第一步</span>气</button>
+        <button class="step-btn" role="tab" id="s2" aria-controls="p2" aria-selected="false"><span class="i">第二步</span>象</button>
+        <button class="step-btn" role="tab" id="s3" aria-controls="p3" aria-selected="false"><span class="i">第三步</span>体</button>
+        <button class="step-btn" role="tab" id="s4" aria-controls="p4" aria-selected="false"><span class="i">第四步</span>夸</button>
+        <button class="step-btn" role="tab" id="s5" aria-controls="p5" aria-selected="false"><span class="i">第五步</span>断</button>
+        <button class="step-btn" role="tab" id="s6" aria-controls="p6" aria-selected="false"><span class="i">第六步</span>尽</button>
+      </div>
+
+      <div class="step-panel">
+        <div id="p1" role="tabpanel" aria-labelledby="s1">
+          <h3>气 — 胸中郁勃先满格</h3>
+          <p class="gloss">强愤、狂喜、巨愁决定全篇能量级。先定调，再落笔；情绪的量级比修辞优先。</p>
+          <p class="cite"><b>可核诗句：</b>「兴酣落笔摇五岳。诗成笑傲凌沧洲。」《江上吟》</p>
+        </div>
+        <div id="p2" role="tabpanel" aria-labelledby="s2" hidden>
+          <h3>象 — 取人格符号连缀</h3>
+          <p class="gloss">随手抓取月、酒、剑、云、江海等意象，取 1—3 象连缀，象必有情，不做中性写景。</p>
+          <p class="cite"><b>可核诗句：</b>「举杯邀明月。对影成三人。」《月下独酌四首》</p>
+        </div>
+        <div id="p3" role="tabpanel" aria-labelledby="s3" hidden>
+          <h3>体 — 情绪决定体裁</h3>
+          <p class="gloss">情绪大即选乐府歌行（长短句、频繁换韵），孤静思乡即选绝句，述志论诗即选五言古风。</p>
+          <p class="cite"><b>体裁统计见：</b><span class="mono">references/12-poetics-prosody.md</span></p>
+        </div>
+        <div id="p4" role="tabpanel" aria-labelledby="s4" hidden>
+          <h3>夸 — 用可计算的数目量不可名状</h3>
+          <p class="gloss">数字夸张、体量夸张、时空压缩各至少一处。三千尺、三百杯、九万里都是度量衡，不是虚指。</p>
+          <p class="cite"><b>可核诗句：</b>「飞流直下三千尺。」《望庐山瀑布水二首》其二 ·「白发三千丈。」《秋浦歌十七首》</p>
+        </div>
+        <div id="p5" role="tabpanel" aria-labelledby="s5" hidden>
+          <h3>断 — 意接而词不接</h3>
+          <p class="gloss">章法跳脱，段与段之间不写过渡，只连情绪；情绪陡转处硬接。</p>
+          <p class="cite"><b>可核诗句：</b>「弃我去者昨日之日不可留。」《宣州谢朓楼饯别校书叔云》</p>
+        </div>
+        <div id="p6" role="tabpanel" aria-labelledby="s6" hidden>
+          <h3>尽 — 一喷而出，不留余味</h3>
+          <p class="gloss">末句宕开（远行 / 远望 / 设问），或压一句格言作结。历代所指之短，亦是其长。</p>
+          <p class="cite"><b>诗话：</b>严羽评「他人作诗用笔想，太白但用胸口一喷即是」《评点李太白诗集》</p>
+        </div>
+      </div>
+
+      <p class="note">
+        最小执行序列（<span class="mono">references/02</span> §10）：判气 → 起句三选一（惊呼法 / 因物起兴法 / 直言判决法）→
+        取象 → 放大 → 插神古人 → 结构（不写过渡，用复沓或长句）→ 收束。
+        自检一句：<b>是否有字需要解释才懂？若有，换成常见字。</b>
+      </p>
+    </section>
+
+    <!-- ============ 心智模型 ============ -->
+    <section class="band reveal" id="mind" aria-labelledby="mind-h">
+      <p class="eyebrow">世界观</p>
+      <h2 class="h2" id="mind-h">八个心智模型</h2>
+      <p class="lede">取自 <span class="mono">references/01-core-philosophy.md</span> 附一，每条配一句可 grep 校验的代表诗行。</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <caption>李白的心智模型 · 内核 · 代表诗句</caption>
+          <thead><tr><th scope="col">#</th><th scope="col">模型</th><th scope="col">一句话内核</th><th scope="col">可核诗句</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="motif">天地逆旅<br>人生过客</td><td>天地是客栈，人只是过客，死才是归家</td><td class="vs">「生者为过客。死者为归人。天地一逆旅。」《拟古十二首》其九</td></tr>
+            <tr><td>2</td><td class="motif">谪仙自命<br>游仙长生</td><td>我本天上仙，暂谪人间，诗与酒即我的仙籍</td><td class="vs">「青莲居士谪仙人。酒肆藏名三十春。」《答湖州迦叶司马问白是何人》</td></tr>
+            <tr><td>3</td><td class="motif">大雅清真<br>复古开新</td><td>诗源于大雅，美在清真天然，不屑绮丽雕饰</td><td class="vs">「自从建安来。绮丽不足珍。」《古风》其一 ·「清水出芙蓉。天然去雕饰。」</td></tr>
+            <tr><td>4</td><td class="motif">愿为辅弼<br>功成身退</td><td>先平天下，再从最高处一次性抽身</td><td class="vs">「终与安社稷。功成去五湖。」《赠韦秘书子春》</td></tr>
+            <tr><td>5</td><td class="motif">侠骨侠肠<br>快意恩仇</td><td>重然诺、轻生死，功成而不受赏</td><td class="vs">「十步杀一人。千里不留行。事了拂衣去。深藏身与名。」《侠客行》</td></tr>
+            <tr><td>6</td><td class="motif">不屈己<br>不干人</td><td>宁作孤直松柏，不为桃李之颜</td><td class="vs">「松柏本孤直。难为桃李颜。」《古风》其十二</td></tr>
+            <tr><td>7</td><td class="motif">大鹏图南<br>齐物逍遥</td><td>以鹏的尺度自许，万物齐一故无可拘束</td><td class="vs">「大鹏一日同风起。扶摇直上九万里。」《上李邕》</td></tr>
+            <tr><td>8</td><td class="motif">万古之愁</td><td>愁与万古等量，唯以酒、月、山水为同谋而退出</td><td class="vs">「抽刀断水水更流。举杯消愁愁更愁。」《宣州谢朓楼饯别校书叔云》</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="note">
+        三条连接线把它们串成一个系统：<b>退出机制线</b> 4＝5＝8（功成身退 / 事了拂衣去 / 散发弄扁舟）；
+        <b>自由意志线</b> 6（人格层）→ 3（文体层）→ 7（宇宙层）；
+        <b>张力线</b> 4（入世之深）↔ 2 / 6 / 7（出世之决），其情绪产物即 8。
+      </p>
+      <p class="note" style="border-left-color:var(--red)">
+        另有一组不可混的区分：「谪仙人」是贺知章所呼、李白反复自用的<b>自命</b>；「诗仙」是<b>后世</b>定型的称号。
+      </p>
+    </section>
+
+    <!-- ============ 意象 ============ -->
+    <section class="band reveal" id="motif" aria-labelledby="motif-h">
+      <p class="eyebrow">意象母题库</p>
+      <h2 class="h2" id="motif-h">十六个意象</h2>
+      <p class="lede">
+        取自 <span class="mono">references/10-image-motif-system.md</span>。选一个意象，只看它的功能与出处。
+        这张表就是拟作时的取象词典。
+      </p>
+
+      <div class="chips" id="chips" role="group" aria-label="按意象筛选">
+        <button class="chip" data-f="all" aria-pressed="true">全部</button>
+        <button class="chip" data-f="yue" aria-pressed="false">月</button>
+        <button class="chip" data-f="jiu" aria-pressed="false">酒</button>
+        <button class="chip" data-f="jian" aria-pressed="false">剑</button>
+        <button class="chip" data-f="peng" aria-pressed="false">鹏</button>
+        <button class="chip" data-f="ma" aria-pressed="false">马</button>
+        <button class="chip" data-f="yun" aria-pressed="false">云</button>
+        <button class="chip" data-f="jiang" aria-pressed="false">江河</button>
+        <button class="chip" data-f="shan" aria-pressed="false">山岳</button>
+        <button class="chip" data-f="xian" aria-pressed="false">仙</button>
+        <button class="chip" data-f="meng" aria-pressed="false">梦</button>
+        <button class="chip" data-f="fa" aria-pressed="false">白发</button>
+        <button class="chip" data-f="tian" aria-pressed="false">青天</button>
+        <button class="chip" data-f="gu" aria-pressed="false">孤独</button>
+        <button class="chip" data-f="qiu" aria-pressed="false">秋霜雪</button>
+        <button class="chip" data-f="hua" aria-pressed="false">花春</button>
+        <button class="chip" data-f="zhou" aria-pressed="false">舟</button>
+      </div>
+
+      <div class="motif-grid" id="motifGrid">
+        <article class="motif-cell" data-m="yue">
+          <h4>月</h4>
+          <p class="fn">时间恒久者、孤独见证者、故乡召唤者；「我—月—影」中唯一知音。</p>
+          <p class="ex"><span>「举头望明月。」<span class="src">静夜思</span></span><span>「举杯邀明月，对影成三人。」<span class="src">月下独酌四首</span></span><span>「今人不见古时月。」<span class="src">把酒问月</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="jiu">
+          <h4>酒 / 杯 / 醉</h4>
+          <p class="fn">非消愁剂，而是确认自我存在的仪式；公开拒绝权贵秩序与功名逻辑。</p>
+          <p class="ex"><span>「会须一饮三百杯。」<span class="src">将进酒</span></span><span>「金樽清酒斗十千。」<span class="src">行路难三首</span></span><span>「花间一壶酒。」<span class="src">月下独酌四首</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="jian">
+          <h4>剑</h4>
+          <p class="fn">「功业」的具身化；拔剑、抚剑、挂壁比握在手中更有力。</p>
+          <p class="ex"><span>「拔剑四顾心茫然。」<span class="src">行路难三首</span></span><span>「十步杀一人。」<span class="src">侠客行</span></span><span>「挥剑决浮云。」<span class="src">古风五十九首</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="peng">
+          <h4>鹏</h4>
+          <p class="fn">被贬抑的绝对自由与孤注一掷的天才自信。频次仅 7，却居名篇。</p>
+          <p class="ex"><span>「大鹏一日同风起。」<span class="src">上李邕</span></span><span>「大鹏飞兮振八裔。」<span class="src">临路歌</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="ma">
+          <h4>马</h4>
+          <p class="fn">天马＝才士自负，白马＝侠少，马迹＝羁旅。</p>
+          <p class="ex"><span>「天马来出月支窟。」<span class="src">天马歌</span></span><span>「银鞍照白马。」<span class="src">侠客行</span></span><span>「章台走马著金鞭。」<span class="src">流夜郎赠辛判官</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="yun">
+          <h4>云</h4>
+          <p class="fn">白云＝可卧可游的隐者之居；浮云＝遮蔽君心之谗佞，亦可化为乡愁。</p>
+          <p class="ex"><span>「浮云游子意。」<span class="src">送友人</span></span><span>「楚山秦山皆白云。」<span class="src">白云歌送刘十六归山</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="jiang">
+          <h4>江河</h4>
+          <p class="fn">黄河＝天降之力与不可逆的时间；江水＝去国、送别的流动空间。</p>
+          <p class="ex"><span>「君不见黄河之水天上来。」<span class="src">将进酒</span></span><span>「黄河西来决昆仑。」<span class="src">公无渡河</span></span><span>「影入平羌江水流。」<span class="src">峨眉山月歌</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="shan">
+          <h4>山岳</h4>
+          <p class="fn">通往仙界的阶梯，也是可对话的巨物。</p>
+          <p class="ex"><span>「相看两不厌。」<span class="src">独坐敬亭山</span></span><span>「五岳寻仙不辞远。」<span class="src">庐山谣寄庐侍御虚舟</span></span><span>「黄山四千仞。」<span class="src">送温处士归黄山白鹅峰旧居</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="xian">
+          <h4>仙 / 游仙</h4>
+          <p class="fn">现实挫败的心理补偿机制；以仙人抚顶、蓬莱扶桑重构一个可自由升降的世界。</p>
+          <p class="ex"><span>「素手把芙蓉。」<span class="src">古风五十九首</span></span><span>「仙人抚我顶。」<span class="src">经乱离后天恩流夜郎忆旧游书怀赠江夏韦太守良宰</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="meng">
+          <h4>梦</h4>
+          <p class="fn">现实的替代入口（庄周梦蝶、梦日边），亦是醒后加倍的空虚。</p>
+          <p class="ex"><span>「庄周梦胡蝶。」<span class="src">古风五十九首</span></span><span>「忽复乘舟梦日边。」<span class="src">行路难三首</span></span><span>「处世若大梦。」<span class="src">春日醉起言志</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="fa">
+          <h4>白发 / 时间之霜</h4>
+          <p class="fn">从不写「老」，而写「突然」——时间被压缩为暴力的瞬间。</p>
+          <p class="ex"><span>「白发三千丈。」<span class="src">秋浦歌十七首</span></span><span>「朝如青丝暮成雪。」<span class="src">将进酒</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="tian">
+          <h4>青天</h4>
+          <p class="fn">度量高远的单位，盛放孤月的容器。</p>
+          <p class="ex"><span>「难于上青天。」<span class="src">蜀道难</span></span><span>「青天中道流孤月。」<span class="src">答王十二寒夜独酌有怀</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="gu">
+          <h4>孤独</h4>
+          <p class="fn">以孤云、孤月、独去闲、对影成三人外化；其独特在「自造陪伴」。</p>
+          <p class="ex"><span>「孤云独去闲。」<span class="src">独坐敬亭山</span></span><span>「对影成三人。」<span class="src">月下独酌四首</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="qiu">
+          <h4>秋 / 霜 / 雪</h4>
+          <p class="fn">秋为底色，雪霜是其极端形态；边地之雪最大，山中积雪最净。</p>
+          <p class="ex"><span>「燕山雪花大如席。」<span class="src">北风行</span></span><span>「积雪照空谷。」<span class="src">自巴东舟行经瞿唐峡登巫山最高峰还题壁</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="hua">
+          <h4>花 / 春</h4>
+          <p class="fn">多与酒同席，与「及时行乐」语义绑定。</p>
+          <p class="ex"><span>「花间一壶酒。」<span class="src">月下独酌四首</span></span><span>「桃花流水窅然去。」<span class="src">山中问答</span></span><span>「春风不相识。」<span class="src">春思</span></span></p>
+        </article>
+        <article class="motif-cell" data-m="zhou">
+          <h4>舟 / 行旅</h4>
+          <p class="fn">李白一生被写成水程；舟是移动的「家」，也是离别的装置。</p>
+          <p class="ex"><span>「朝辞白帝彩云间。」<span class="src">早发白帝城</span></span><span>「江城五月落梅花。」<span class="src">与史郎中钦听黄鹤楼上吹笛</span></span></p>
+        </article>
+      </div>
+
+      <p class="note">
+        名篇导航表另收 <b>40 篇</b>本集内可检索的代表作（体裁 / 主题 / 名句），全部经 grep 复核存在；
+        赏析库 <b>58 篇</b>分古风乐府 26 篇与古近体绝句 32 篇，每篇引句逐条命中后写入。
+      </p>
+    </section>
+
+    <!-- ============ 知识底座 ============ -->
+    <section class="band reveal" id="base" aria-labelledby="base-h">
+      <p class="eyebrow">底座</p>
+      <h2 class="h2" id="base-h">它凭什么不瞎编</h2>
+      <p class="lede">
+        正典只有一部：用户上传的《李白诗全集》电子本，经 GB18030 → UTF-8 转码、简体化、私用区清理后落成
+        <span class="mono">modules/01_libai-shi-quanji.md</span>（434KB / 25 卷 / 1010 首）。
+        任何一句写进答案的诗，都要先在这份文件里 <span class="mono">grep</span> 命中。
+      </p>
+
+<pre class="tree"><code>libai/
+├── SKILL.md                <span class="cm">主入口 313 行：路由 + 7 段式角色规则 + 速查卡 + 名篇导航</span>
+├── modules/
+│   ├── 01_libai-shi-quanji.md  <span class="hl">诗全集 25 卷 1010 首（编码修复后，UTF-8）</span>
+│   └── 02_buyi.md          <span class="cm">补遗：本集未收 5 篇原文</span>
+├── references/             <span class="cm">14 维文学家框架 · 12 份维度分析（3,924 行）</span>
+│   ├── 01-core-philosophy      <span class="cm">8 个心智模型</span>
+│   ├── 02-creation-heuristics  <span class="cm">创作决策启发式</span>
+│   ├── 03-style-dna            <span class="cm">诗风 DNA · 高频字词 · 句式节奏</span>
+│   ├── 04-antipatterns-boundaries  <span class="cm">诗病 · 伪作 · 诚实边界</span>
+│   ├── 05-biography-legacy     <span class="cm">生平 · 交游 · 后世影响</span>
+│   ├── 06-tensions             <span class="cm">8 组内在张力</span>
+│   ├── 07-literary-lineage     <span class="cm">文学谱系：屈庄 → 建安 → 谢朓鲍照 → 陈子昂</span>
+│   ├── 08-faq                  <span class="cm">常见问题 35 问 · 名句速查 · 误读清单</span>
+│   ├── 09-ethics-safety        <span class="cm">创作伦理与安全层</span>
+│   ├── 10-image-motif-system   <span class="cm">意象母题库 + 代表作谱系</span>
+│   ├── 11-cultural-context     <span class="cm">唐代文士文化语境</span>
+│   ├── 12-poetics-prosody      <span class="cm">诗体与格律 · 韵脚字库</span>
+│   ├── 26-missing-inventory    <span class="hl">缺篇盘点（v1.1.0 新增）</span>
+│   └── 27-proofread-log        <span class="hl">校勘日志（v1.1.0 新增）</span>
+├── cases/                  <span class="cm">名篇赏析库 58 篇：00 总索引 / 01 古风乐府 26 / 02 绝句 32 / 03 未收 5</span>
+└── scripts/                <span class="cm">清洗 · 核验 · 统计脚本（转码、diff、校勘、字数）</span></code></pre>
+
+      <p class="note">
+        取证方式可以复现：<span class="mono">grep -n "引句" modules/01_libai-shi-quanji.md</span> 逐条命中后才写入。
+        赏析库里所有引句加「」，同一篇内不同原行以 <span class="mono">／</span> 分隔。
+      </p>
+    </section>
+
+    <!-- ============ 校勘记 ============ -->
+    <section class="band reveal" id="proof" aria-labelledby="proof-h">
+      <p class="eyebrow">v1.1.0</p>
+      <h2 class="h2" id="proof-h">校勘记：四段"假缺失"是怎么找回来的</h2>
+      <p class="lede">
+        初版判定的"本集缺 18 篇名作"是错的。真实原因是字节层面的解码事故——
+        <b>GBK 字节被误按 EUC-JP 解码</b>，导致四整段正文显示为乱码，看起来像缺篇。
+      </p>
+
+      <div class="proof">
+        <div>
+          <p class="pk">损坏区间</p>
+          <p class="pv">行 2530—3202 · 8273—8880</p>
+          <p class="pd">对应卷四、卷十二</p>
+        </div>
+        <div>
+          <p class="pk">损坏区间</p>
+          <p class="pv">行 9356—10118 · 13625—14233</p>
+          <p class="pd">对应卷十四、卷二十</p>
+        </div>
+        <div>
+          <p class="pk">校补</p>
+          <p class="pv">残字 232 处 · 讹字 198 处</p>
+          <p class="pd">涉 226 字 / 83 首诗，据《李太白集》《全唐诗》校补；今仅余 3 处异文校记</p>
+        </div>
+        <div>
+          <p class="pk">补遗</p>
+          <p class="pv">本集确未收 5 篇</p>
+          <p class="pd">折荷有赠、别匡山、菩萨蛮、忆秦娥、桂殿秋，据权威源补录为 <span class="mono">modules/02_buyi.md</span></p>
+        </div>
+      </div>
+
+      <p class="lede">逆变换复原后，此前被误判缺失的名篇全部回到本集：</p>
+      <div class="triggers">
+        <span class="trig">梦游天姥吟留别</span><span class="trig">望庐山瀑布</span><span class="trig">黄鹤楼送孟浩然之广陵</span>
+        <span class="trig">清平调三首</span><span class="trig">南陵别儿童入京</span><span class="trig">望天门山</span>
+        <span class="trig">渡荆门送别</span><span class="trig">登金陵凤凰台</span><span class="trig">秋登宣城谢脁北楼</span>
+        <span class="trig">闻王昌龄</span><span class="trig">白马篇</span><span class="trig">短歌行</span><span class="trig">玉阶怨</span>
+        <span class="trig">越中览古</span><span class="trig">捣衣篇</span><span class="trig">鹦鹉洲</span><span class="trig">望黄鹤楼</span>
+      </div>
+
+      <p class="note" style="border-left-color:var(--red)">
+        <span class="strike">本集不完整、缺 18 篇名作</span><br>
+        <span class="stamp">v1.1.0 更正作废</span>
+        &nbsp;系编码损坏造成的<b>假缺失</b>，本集实为完整诗本。
+      </p>
+
+      <p class="note">
+        同时修订了 SKILL.md、references/02·04·05·07·08·10、cases/00—03、README 中"本集缺失名篇"的旧误判；
+        因文件修复后 <span class="mono">L####</span> 精确行号会偏移，统一改为「可 grep 命中」表述。
+        编码卫生另清理 <b>51 个私用区字符</b>，22 个文件全部通过 UTF-8 硬校验，0 乱码、0 死链；
+        角色一致性自测 8 题 <b>8/8 通过</b>。
+      </p>
+
+      <p class="note" style="border-left-color:var(--red)">
+        最重要的一条边界：<b>本集未收 ≠ 李白没写过。</b>只可标「本集未收 / 待考」，不可断为伪托。
+        词作、赋、文书序不在本集属<b>版本体例</b>，不是缺失。
+      </p>
+    </section>
+
+    <!-- ============ 铁律与红线 ============ -->
+    <section class="band reveal" id="law" aria-labelledby="law-h">
+      <p class="eyebrow">纪律</p>
+      <h2 class="h2" id="law-h">七条输出铁律</h2>
+      <p class="lede">写死在 <span class="mono">SKILL.md</span> 的角色规则里，不靠临场自觉。</p>
+
+      <ol class="laws">
+        <li><b>拟作必书面声明</b> <span class="k">不可协商</span><br>凡生成诗文，题首或题末必含一行「以下为 AI 拟李白风格之作，非李白原作」；禁止无标注署「李白《××》」。</li>
+        <li><b>引诗必标《篇名》</b> <span class="k">可复现</span><br>写进答案前先在正典 grep 命中；能给集内行号更佳；引通行本异文须注明「明清改本文字」。</li>
+        <li><b>评论须给证据</b> <span class="k">先判断后诗句</span><br>每个判断后至少跟一句可核诗句或一条可出处诗话；无证据的判断改为存疑表述。</li>
+        <li><b>存疑篇目引用即加注</b> <span class="k">本集自带按语</span><br>《笑歌行》《悲歌行》《草书歌行》《上李邕》本集自带伪作按语；《去妇词》一作顾况诗；《长干行》其二一作张潮或黄庭坚作李益。</li>
+        <li><b>本集未收不得反推</b> <span class="k">以「本集未收」表述</span><br>绝不反推为"李白没写过"或"必是伪托"。</li>
+        <li><b>不编造</b> <span class="k">零虚构</span><br>不虚构集内篇题、不虚构佚句、不凭印象造诗话评语、不臆造版本——「宋本作……」须能指认出处。</li>
+        <li><b>不神化、不猎奇</b> <span class="k">呈现历代批评</span><br>讲长处同时给出批评：王安石「识污下」、王世贞「青莲较易厌」「索之易穷」、赵翼「沉刻则不如杜，雄鸷亦不如韩」。</li>
+      </ol>
+
+      <h3 class="h2" style="font-size:1.3rem;margin-top:2.4rem">三条红线</h3>
+      <dl class="def-list">
+        <div>
+          <dt>涉酒</dt>
+          <dd>讲「酒是精神出口与社交语法」，不讲「喝到醉才写得出好诗」。「会须一饮三百杯」是夸张修辞；
+            唐代饮的是 6—15 度发酵酒，蒸馏酒普及在元代以后。豪饮句输出时附现实提示，未成年人场景必须加「酒精危害健康，未成年人禁止饮酒」。</dd>
+        </div>
+        <div>
+          <dt>涉炼丹</dt>
+          <dd>所有丹语（丹砂、还丹、琴心三叠）均为<b>诗歌语言，非操作指南</b>。不得给出丹方、剂量、火候、服法；一律标注「唐代历史语境，切勿效仿」。</dd>
+        </div>
+        <div>
+          <dt>涉侠客暴力</dt>
+          <dd>「十步杀一人」「挥剑决浮云」一律标注<b>文学修辞，非现实倡导</b>；不生成现实暴力、复仇、伤害他人的文案。</dd>
+        </div>
+        <div>
+          <dt>切出角色</dt>
+          <dd>用户现实困境涉及抑郁、绝望、法律、医疗、投资时，退出角色，给真实支持资源与专业建议提示，不借李白身份下专业结论。
+            也不得让"李白"为现代商品、投资标的、政治立场站台。</dd>
+        </div>
+      </dl>
+
+      <p class="note">
+        反查用途——以李白口吻评诗改诗时的标准排序：<b>真（清真）&gt; 气（风骨）&gt; 自由（不缚声律）&gt; 工巧（最末）</b>；
+        反对堆砌典故与雕琢对偶。
+      </p>
+    </section>
+
+    <!-- ============ 怎么触发 ============ -->
+    <section class="band reveal" id="use" aria-labelledby="use-h">
+      <p class="eyebrow">用法</p>
+      <h2 class="h2" id="use-h">提到这些就会激活</h2>
+      <p class="lede">frontmatter 里的触发词；命中任一即进入工作流。</p>
+
+      <div class="triggers">
+        <span class="trig">李白</span><span class="trig">李太白</span><span class="trig">太白</span>
+        <span class="trig">青莲居士</span><span class="trig">诗仙</span><span class="trig">谪仙人</span>
+        <span class="trig">将进酒</span><span class="trig">静夜思</span><span class="trig">蜀道难</span>
+        <span class="trig">唐诗</span><span class="trig">盛唐诗人</span><span class="trig">浪漫主义诗人</span>
+        <span class="trig">拟李白风格</span><span class="trig">以李白视角</span><span class="trig">李白会怎么写</span>
+        <span class="trig">用李白口吻</span>
+      </div>
+      <div class="triggers" style="margin-top:.6rem">
+        <span class="trig off">不触发：与唐代文学无关的一般问答</span>
+        <span class="trig off">不触发：现代诗创作（除非明确要求李白风格）</span>
+      </div>
+
+      <h3 class="h2" style="font-size:1.3rem;margin-top:2.4rem">五步用法</h3>
+      <ol class="laws">
+        <li>把整个 <span class="mono">libai/</span> 目录放到技能目录下（例如 <span class="mono">~/.skills/libai/</span>），frontmatter 的 <span class="mono">name: libai</span> 即注册名。</li>
+        <li>提到李白 / 太白 / 诗仙 / 将进酒 / 静夜思 / 蜀道难 / 拟李白风格等 → 自动激活。</li>
+        <li>AI 按 <span class="mono">SKILL.md</span> 的检索表定位维度，按需加载 <span class="mono">references/</span> 或 <span class="mono">cases/</span>。</li>
+        <li>引诗前先在 <span class="mono">modules/01</span> 核验；本集未收者（仅 5 篇）标「本集未收」。</li>
+        <li>拟作必附「AI 拟李白风格之作，非李白原作」；文末按固定免责模板输出。</li>
+      </ol>
+    </section>
+
+    <!-- ============ 版本与免责 ============ -->
+    <section class="band reveal" id="release" aria-labelledby="release-h">
+      <p class="eyebrow">版本</p>
+      <h2 class="h2" id="release-h">两次提交</h2>
+
+      <div class="ledger">
+        <div>
+          <p class="ver">v1.1.0<span>2026-10-05</span></p>
+          <p>语料修复与补遗。修复正典 4 段编码损坏，校补残字 232 处、讹字 198 处 → 本集为完整诗本（1010 首，名篇齐备）；补录本集未收 5 篇；同步修正 references / cases / SKILL / README 的边界表述；新增缺篇盘点与校勘日志。</p>
+        </div>
+        <div>
+          <p class="ver">v1.0.0<span>2026-10-04</span></p>
+          <p>首次蒸馏。由「中医思维蒸馏器」方法论迁移改造为<b>文学家 14 维框架</b>：Phase 0 素材转码 → Phase 1 十二路并行调研（3,924 行）→ Phase 2 框架合成（SKILL.md 313 行）→ Phase 3 质量验证 → Phase 4 增量补充 58 篇赏析。</p>
+        </div>
+      </div>
+
+      <h3 class="h2" style="font-size:1.3rem;margin-top:2.4rem">使用声明</h3>
+      <div class="fineprint">
+        <p>本内容由 AI 依据《李太白集》（正典：<span class="mono">modules/01_libai-shi-quanji.md</span>）及可查文献整理，旨在文学欣赏与学术普及。
+        文中凡标注「拟李白体」者均为 AI 创作，非李白原作，亦不构成文学史上的考订结论。
+        涉酒、涉服食求仙、涉游侠暴力等内容均属唐代历史语境与文学修辞，切勿效仿（酒精危害健康，未成年人禁止饮酒）。
+        历史人物生平存疑之处已标注「存疑／待考」。本内容不构成医疗、法律或投资建议。</p>
+        <p>本 skill 为文学欣赏与学术普及素材，不代表李白本人立场。涉及生平佚事、篇目归属者，存疑处已标注，皆标存疑或待考。</p>
+      </div>
+
+      <footer class="foot">
+        <span>libai · 李白文学家思维 skill · v1.1.0</span>
+        <span>正典 25 卷 1010 首 · 434 KB</span>
+        <span>仓库收录 54 个技能文件（含 31 个校勘脚本）</span>
+        <span>本页为 README / SKILL / CHANGELOG 的可视化整理，未新增素材</span>
+        <span><a href="https://github.com/jangviktor-web/libai-skill">仓库</a> · <a href="https://github.com/jangviktor-web/libai-skill/blob/main/README.md">README</a> · <a href="LICENSE">许可 CC BY-SA 4.0</a></span>
+      </footer>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 滚动揭示 */
+  var targets = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    targets.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    /* 首屏之内的区块直接显形，不做入场动画；其余交给观察器 */
+    targets.forEach(function(el){
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+        el.classList.add('in');
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  /* 六步法 tablist */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.step-btn'));
+  var panels = tabs.map(function(t){ return document.getElementById(t.getAttribute('aria-controls')); });
+  function select(i){
+    tabs.forEach(function(t, n){
+      var on = n === i;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      panels[n].hidden = !on;
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ select(i); });
+    t.addEventListener('keydown', function(ev){
+      var n = null;
+      if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') n = (i + 1) % tabs.length;
+      if (ev.key === 'ArrowLeft'  || ev.key === 'ArrowUp')   n = (i - 1 + tabs.length) % tabs.length;
+      if (ev.key === 'Home') n = 0;
+      if (ev.key === 'End')  n = tabs.length - 1;
+      if (n !== null) { ev.preventDefault(); select(n); tabs[n].focus(); }
+    });
+  });
+  select(0);
+
+  /* 意象筛选 */
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('.motif-cell'));
+  function apply(filter){
+    cells.forEach(function(c){
+      c.hidden = filter !== 'all' && c.getAttribute('data-m') !== filter;
+    });
+    chips.forEach(function(c){
+      c.setAttribute('aria-pressed', c.getAttribute('data-f') === filter ? 'true' : 'false');
+    });
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){ apply(c.getAttribute('data-f')); });
+  });
+
+  /* 目次高亮 */
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var a = map[e.target.id];
+        if (!a) return;
+        if (e.isIntersecting) {
+          links.forEach(function(l){ l.removeAttribute('aria-current'); });
+          a.setAttribute('aria-current', 'true');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    Object.keys(map).forEach(function(id){
+      var s = document.getElementById(id);
+      if (s) spy.observe(s);
+    });
+  }
+})();
+</script>
+</body>
+</html>
