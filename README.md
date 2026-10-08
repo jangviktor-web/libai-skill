@@ -2,7 +2,7 @@
 
 <img width="120" src="docs/assets/logo.webp" alt="李白 Skill Logo：石青圆环内李白举杯对月，下方金线匾额书「李白」">
 
-# 李白Skill · 文学家思维AI
+# 李白Skill · 唐朝诗人思维AI
 
 **将盛唐诗人李白的完整诗学体系注入 AI Agent**
 
@@ -37,11 +37,9 @@
 ## 快速安装
 
 <details>
-<summary><b>SkillHub（腾讯云 · 推荐）一键安装</b></summary>
+<summary><b>SkillHub（腾讯云·推荐）可复制下面文字到agent安装 </b></summary>
 
-把下面这行发给你的 agent：
-
-```text
+```
 请根据 https://skillhub.cn/install/skillhub.md，安装 @user_ff4d9420/libai。
 ```
 
@@ -54,7 +52,9 @@
 
 ```bash
 git clone https://github.com/jangviktor-web/libai-skill.git
-cp -r libai-skill/libai ~/.claude/skills/libai/     # 或你所用客户端的 skills 目录
+cp -r libai-skill/libai ~/.claude/skills/libai/
+把 https://github.com/jangviktor-web/libai-skill 克隆下来，
+将仓库里的 libai/ 整个目录安装到本地 skills 目录，然后激活它。 # 或你所用客户端的 skills 目录
 ```
 
 目录名即注册名（frontmatter 中 `name: libai`）。装好后提到"李白"即激活。
@@ -177,7 +177,8 @@ cp -r libai-skill/libai ~/.claude/skills/libai/     # 或你所用客户端的 s
 
 **🌐 https://jangviktor-web.github.io/libai-skill/**
 
-<img width="820" src="docs/assets/og.jpg" alt="libai 功能说明页预览：冷调宣纸底，右侧石青矿物色晕，左下无字朱印方框">
+<img  height="883" alt="360截图20261008150005_compressed" src="https://github.com/user-attachments/assets/89b1d97f-1bca-4979-a2b8-574bab61c18f" />
+
 
 </div>
 
