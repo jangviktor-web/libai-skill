@@ -21,6 +21,8 @@
 >
 > 李白自任的不是写诗，是删述。这个 skill 做的事情很朴素：给他一套可核验的底座，让他说的话能被 grep 命中。
 
+<img src="docs/assets/banner.jpg" alt="冷调宣纸横幅：左侧大片留白与隐约竖栏线，一道石青矿物色由右缘晕入，左下角一枚无字朱印方框" width="100%" />
+
 **[→ 完整功能说明页（可视化版）](https://jangviktor-web.github.io/libai-skill/)**
 
 ---
