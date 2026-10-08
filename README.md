@@ -2,7 +2,7 @@
 
 <img width="120" src="docs/assets/logo.webp" alt="李白 Skill Logo：石青圆环内李白举杯对月，下方金线匾额书「李白」">
 
-# 李白Skill · 文学家思维AI
+# 李白Skill · 唐朝诗人思维AI
 
 **将盛唐诗人李白的完整诗学体系注入 AI Agent**
 
