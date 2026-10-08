@@ -36,13 +36,10 @@
 ## 快速安装
 
 <details>
-<summary><b>一句话让 Agent 自己装（推荐）</b></summary>
+<summary><b>SkillHub（腾讯云·推荐）可复制下面文字到agent安装 </b></summary>
 
-把下面这段直接发给你的 agent：
-
-```text
-把 https://github.com/jangviktor-web/libai-skill 克隆下来，
-将仓库里的 libai/ 整个目录安装到本地 skills 目录，然后激活它。
+```
+请根据 https://skillhub.cn/install/skillhub.md，安装 @user_ff4d9420/libai。
 ```
 
 </details>
@@ -52,7 +49,9 @@
 
 ```bash
 git clone https://github.com/jangviktor-web/libai-skill.git
-cp -r libai-skill/libai ~/.claude/skills/libai/     # 或你所用客户端的 skills 目录
+cp -r libai-skill/libai ~/.claude/skills/libai/
+把 https://github.com/jangviktor-web/libai-skill 克隆下来，
+将仓库里的 libai/ 整个目录安装到本地 skills 目录，然后激活它。 # 或你所用客户端的 skills 目录
 ```
 
 目录名即注册名（frontmatter 中 `name: libai`）。装好后提到"李白"即激活。
