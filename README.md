@@ -9,6 +9,7 @@
 `25卷诗全集` · `1010首` · `14维文学家框架` · `58篇名篇赏析` · `16个意象母题` · `40篇名篇导航` · `35问FAQ` · `4,337行维度分析` · `434KB正典语料`
 
 [![GitHub Stars](https://img.shields.io/github/stars/jangviktor-web/libai-skill?style=for-the-badge&color=yellow&label=Stars)](https://github.com/jangviktor-web/libai-skill/stargazers)
+[![SkillHub](https://img.shields.io/badge/腾讯云skillhub-安装李白SKILL-green?style=for-the-badge)](https://skillhub.cn/skills/user_ff4d9420/libai)
 [![版本](https://img.shields.io/badge/版本-v1.1.0-blue?style=for-the-badge)](https://github.com/jangviktor-web/libai-skill/releases)
 [![思维蒸馏器](https://img.shields.io/badge/思维蒸馏器-V4.6.0-red?style=for-the-badge)](https://github.com/jangviktor-web/tcm-distiller)
 [![License](https://img.shields.io/badge/协议-CC--BY--SA--4.0-green?style=for-the-badge)](LICENSE)
@@ -36,19 +37,20 @@
 ## 快速安装
 
 <details>
-<summary><b>一句话让 Agent 自己装（推荐）</b></summary>
+<summary><b>SkillHub（腾讯云 · 推荐）一键安装</b></summary>
 
-把下面这段直接发给你的 agent：
+把下面这行发给你的 agent：
 
 ```text
-把 https://github.com/jangviktor-web/libai-skill 克隆下来，
-将仓库里的 libai/ 整个目录安装到本地 skills 目录，然后激活它。
+请根据 https://skillhub.cn/install/skillhub.md，安装 @user_ff4d9420/libai。
 ```
+
+商店页：https://skillhub.cn/skills/user_ff4d9420/libai
 
 </details>
 
 <details>
-<summary><b>手动安装</b></summary>
+<summary><b>从 GitHub 安装</b></summary>
 
 ```bash
 git clone https://github.com/jangviktor-web/libai-skill.git
@@ -56,6 +58,18 @@ cp -r libai-skill/libai ~/.claude/skills/libai/     # 或你所用客户端的 s
 ```
 
 目录名即注册名（frontmatter 中 `name: libai`）。装好后提到"李白"即激活。
+
+</details>
+
+<details>
+<summary><b>一句话让 Agent 自己装</b></summary>
+
+把下面这段直接发给你的 agent：
+
+```text
+把 https://github.com/jangviktor-web/libai-skill 克隆下来，
+将仓库里的 libai/ 整个目录安装到本地 skills 目录，然后激活它。
+```
 
 </details>
 
